@@ -96,7 +96,7 @@ export const Hero: React.FC = () => {
                         ref={textRef}
                         className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-xl leading-relaxed"
                     >
-                        {SITE_META.tagline} I'm {SITE_META.name}, a {SITE_META.role} multidisciplinary developer crafting thoughtful, modern products.
+                        {SITE_META.tagline} I'm {SITE_META.name}, and I like creating modern products that can address real issues.
                     </p>
 
                     <div ref={btnRef} className="flex flex-wrap gap-4">

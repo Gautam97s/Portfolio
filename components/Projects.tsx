@@ -30,10 +30,17 @@ export const Projects: React.FC<ProjectsProps> = ({
   const displayedProjects = (limit && !expanded) ? PROJECTS.slice(0, limit) : PROJECTS;
   const shouldShowButton = showViewAllButton && limit && PROJECTS.length > limit;
 
+  // Register ScrollTrigger to ensure it's linked to GSAP
+  gsap.registerPlugin(ScrollTrigger);
+
   useEffect(() => {
+    let ctx: gsap.Context | undefined;
+
     // Use a small timeout to ensure DOM is ready when switching views
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+      if (!containerRef.current) return;
+
+      ctx = gsap.context(() => {
         const cards = gsap.utils.toArray('.project-card');
 
         // Reset any previous GSAP settings
@@ -57,11 +64,12 @@ export const Projects: React.FC<ProjectsProps> = ({
           once: true
         });
       }, containerRef);
-
-      return () => ctx.revert();
     }, 50);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (ctx) ctx.revert();
+    };
   }, [displayedProjects]); // Re-run when the list of projects changes
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {

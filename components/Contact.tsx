@@ -52,7 +52,7 @@ export const Contact: React.FC = () => {
 
                             <div className="space-y-4">
                                 <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-indigo-600 dark:text-indigo-300">
+                                    <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-indigo-600 dark:text-indigo-300">
                                         📧
                                     </div>
                                     <a
@@ -64,8 +64,8 @@ export const Contact: React.FC = () => {
                                 </div>
 
                                 <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-orange-600 dark:text-orange-300">
-                                        🐦
+                                    <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-black dark:text-orange-300">
+                                        𝕏
                                     </div>
                                     <a
                                         href={SITE_META.socials.twitter}
@@ -73,7 +73,22 @@ export const Contact: React.FC = () => {
                                         rel="noopener noreferrer"
                                         className="hover:text-primary transition-colors font-medium"
                                     >
-                                        @Gautam_Sharma
+                                        @Gautamsharma905
+                                    </a>
+
+                                </div>
+
+                                <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-[#0A66C2] dark:text-orange-300">
+                                        In
+                                    </div>
+                                    <a
+                                        href={SITE_META.socials.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-primary transition-colors font-medium"
+                                    >
+                                        Gautam Sharma
                                     </a>
 
                                 </div>
@@ -99,7 +114,7 @@ export const Contact: React.FC = () => {
                                         id="name"
                                         required
                                         type="text"
-                                        placeholder="Jane Doe"
+                                        placeholder="Your Name"
                                         className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                     />
                                 </div>
@@ -115,7 +130,7 @@ export const Contact: React.FC = () => {
                                         id="email"
                                         required
                                         type="email"
-                                        placeholder="jane@example.com"
+                                        placeholder="name@example.com"
                                         className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                     />
                                 </div>

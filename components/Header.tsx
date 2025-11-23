@@ -115,7 +115,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-4" : "py-6"
+            className={`fixed top-0 left-0 px-32 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-4" : "py-6"
                 }`}
         >
             <div className="container mx-auto px-6">

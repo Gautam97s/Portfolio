@@ -2,13 +2,13 @@ import { Project, ExperienceItem, Skill } from './types';
 
 export const SITE_META = {
   name: "Gautam Sharma",
-  role: "Creative Frontend Engineer",
-  tagline: "Building digital experiences that blends aesthetics, performance, and intelligence.",
+  role: "multidisciplinary creative frontend engineer",
+  tagline: "I design online experiences which are clean, swift and purposeful.",
   email: "sharma.gautam0905@gmail.com",
   socials: {
     github: "https://github.com/Gautam97s",
-    twitter: "https://twitter.com",
-    linkedin: "https://linkedin.com",
+    twitter: "https://x.com/Gautamsharma905",
+    linkedin: "https://www.linkedin.com/in/gautam-sharma-5187b027a/",
   }
 };
 
@@ -121,13 +121,16 @@ export const EXPERIENCE: ExperienceItem[] = [
 ];
 
 export const SKILLS: Skill[] = [
-  { name: "React / Next.js", category: "frontend" },
-  { name: "TypeScript", category: "frontend" },
+  { name: "React.js", category: "frontend" },
+  { name: "Javascript", category: "frontend" },
   { name: "Tailwind CSS", category: "frontend" },
   { name: "GSAP", category: "frontend" },
   { name: "Node.js", category: "backend" },
+  { name: "Express.js", category: "backend" },
   { name: "PostgreSQL", category: "backend" },
-  { name: "GraphQL", category: "backend" },
   { name: "Figma", category: "tools" },
   { name: "Git", category: "tools" },
+  { name: "Tensorflow", category: "Machine Learning" },
+  { name: "Ultralytics", category: "Machine Learning" },
+  { name: "Pytorch", category: "Machine Learning" },
 ];
