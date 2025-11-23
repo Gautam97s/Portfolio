@@ -9,7 +9,7 @@ export default function HomePage() {
     <>
       <Hero />
       <About />
-      <Projects limit={4} showViewAllButton />
+      <Projects limit={6} showViewAllButton />
       <Timeline />
       <Contact />
     </>

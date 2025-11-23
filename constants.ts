@@ -24,12 +24,12 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 2,
-    title: "Echo Chat",
-    description: "Real-time messaging application with end-to-end encryption and AI-powered text suggestions via Gemini API.",
-    tags: ["TypeScript", "Socket.io", "Node.js", "AI"],
-    image: "https://picsum.photos/800/600?random=2",
-    link: "#",
-    github: "#"
+    title: "TheStore",
+    description: "TheStore — a fast, secure Next.js cloud drive where you can save files effortlessly, backed by a simple OTP modal for quick and safe access.",
+    tags: ["TypeScript", "Next.ts", "Appwrite", "Tailwind"],
+    image: "/images/Thestore.png",
+    link: "https://the-store-theta.vercel.app/",
+    github: "https://github.com/Gautam97s/TheStore"
   },
   {
     id: 3,
@@ -78,6 +78,15 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 8,
+    title: "Nomad Stay",
+    description: "Booking platform for digital nomads offering curated stays with verified internet speeds.",
+    tags: ["Next.js", "Supabase", "Stripe"],
+    image: "https://picsum.photos/800/600?random=8",
+    link: "#",
+    github: "#"
+  },
+  {
+    id: 9,
     title: "Nomad Stay",
     description: "Booking platform for digital nomads offering curated stays with verified internet speeds.",
     tags: ["Next.js", "Supabase", "Stripe"],
