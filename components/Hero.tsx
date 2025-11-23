@@ -101,7 +101,7 @@ export const Hero: React.FC = () => {
 
                     <div ref={btnRef} className="flex flex-wrap gap-4">
                         <a
-                            href={`#${SectionId.PROJECTS}`}
+                            href={"/projects"}
                             className="group relative px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-semibold overflow-hidden flex items-center gap-2 transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/25"
                         >
                             <span className="relative z-10">View Work</span>
