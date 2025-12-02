@@ -157,8 +157,7 @@ export const About: React.FC = () => {
                             <div>
                                 <h4 className="font-bold text-sm mb-1">Currently learning</h4>
                                 <p className="text-sm text-slate-600 dark:text-slate-400">
-                                    Exploring WebGL shaders and Rust for WebAssembly to push
-                                    browser performance limits.
+                                    Learning about Python libraries and machine learning models, and applying them to my real-life projects.
                                 </p>
                             </div>
                         </div>

@@ -33,21 +33,21 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 3,
-    title: "Zen Task",
-    description: "A minimal task management app focusing on accessibility and keyboard navigation, built with a mobile-first approach.",
-    tags: ["Next.js", "Framer Motion", "Radix UI"],
-    image: "https://picsum.photos/800/600?random=3",
-    link: "#",
-    github: "#"
+    title: "Velvet Pour",
+    description: "A React based cocktail discovery website that can be explored visually, powered by GSAP to create a smooth and high-end experience.",
+    tags: ["React", "GSAP", "Tailwind"],
+    image: "/images/Cocktail.png",
+    link: "https://github.com/Gautam97s/CocktailSite",
+    github: "https://github.com/Gautam97s/CocktailSite"
   },
   {
     id: 4,
-    title: "Crypto Watch",
-    description: "Cryptocurrency tracker with live price updates, historical charting, and portfolio management features.",
-    tags: ["React", "Chart.js", "CoinGecko API"],
-    image: "https://picsum.photos/800/600?random=4",
-    link: "#",
-    github: "#"
+    title: "MovieWeb",
+    description: "A movie discovery website that allows you to search for movies and view their details.",
+    tags: ["React", "Tailwind", "TMDB API"],
+    image: "/images/MovieWeb.png",
+    link: "https://movieweb-five-tau.vercel.app/",
+    github: "https://github.com/Gautam97s/MovieProject"
   },
   {
     id: 5,
@@ -87,10 +87,10 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 9,
-    title: "Nomad Stay",
-    description: "Booking platform for digital nomads offering curated stays with verified internet speeds.",
-    tags: ["Next.js", "Supabase", "Stripe"],
-    image: "https://picsum.photos/800/600?random=8",
+    title: "Kickflip",
+    description: "A modern and sleek portfolio website template built with React, Tailwind CSS, and GSAP for smooth animations.",
+    tags: ["React", "Tailwind", "GSAP"],
+    image: "https://picsum.photos/800/600?random=9",
     link: "#",
     github: "#"
   }
