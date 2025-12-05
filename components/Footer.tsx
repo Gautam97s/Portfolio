@@ -5,7 +5,7 @@ import { SITE_META } from "../constants";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="py-8 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800">
+    <footer className="py-8 text-center text-sm text-slate-500 dark:text-slate-400 border-t border-slate-200 dark:border-slate-950">
       <div className="container mx-auto px-6">
         <p>
           © {new Date().getFullYear()} {SITE_META.name}. Built with Next.js, Tailwind & GSAP.

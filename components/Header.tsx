@@ -164,7 +164,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                             ))}
                         </ul>
 
-                        <div className="w-px h-6 bg-slate-300 dark:bg-slate-700 mx-4"></div>
+                        <div className="w-px h-6 bg-slate-300 dark:bg-slate-800 mx-4"></div>
 
                         <div className="flex items-center space-x-4">
                             <a
@@ -179,7 +179,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
 
                             <button
                                 onClick={toggleTheme}
-                                className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                                className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
                                 aria-label="Toggle Theme"
                             >
                                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -214,7 +214,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-lg font-medium py-2 border-b border-slate-200 dark:border-slate-700 last:border-0 hover:text-primary hover:pl-2 transition-all"
+                                    className="text-lg font-medium py-2 border-b border-slate-200 dark:border-slate-900/50 last:border-0 hover:text-primary hover:pl-2 transition-all"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     {link.name}
@@ -224,7 +224,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                                     key={link.name}
                                     href={link.href}
                                     onClick={(e) => onMobileLink(e, link.href)}
-                                    className="text-lg font-medium py-2 border-b border-slate-200 dark:border-slate-700 last:border-0 hover:text-primary hover:pl-2 transition-all"
+                                    className="text-lg font-medium py-2 border-b border-slate-200 dark:border-slate-900/50 last:border-0 hover:text-primary hover:pl-2 transition-all"
                                 >
                                     {link.name}
                                 </a>

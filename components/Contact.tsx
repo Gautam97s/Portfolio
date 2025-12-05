@@ -34,7 +34,7 @@ export const Contact: React.FC = () => {
     return (
         <section
             id={SectionId.CONTACT}
-            className="py-24 bg-gradient-to-b from-transparent to-primary/5 dark:to-primary/5 relative"
+            className="py-24 bg-gradient-to-b from-transparent to-primary/5 dark:to-dark/30 relative"
         >
             <div className="container mx-auto px-8 md:px-12 max-w-4xl">
                 <div className="glass-panel rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden relative">
@@ -115,7 +115,7 @@ export const Contact: React.FC = () => {
                                         required
                                         type="text"
                                         placeholder="Your Name"
-                                        className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                        className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-dark/60 border border-slate-200 dark:border-slate-900/50 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                     />
                                 </div>
 
@@ -131,7 +131,7 @@ export const Contact: React.FC = () => {
                                         required
                                         type="email"
                                         placeholder="name@example.com"
-                                        className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                        className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-dark/60 border border-slate-200 dark:border-slate-900/50 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                     />
                                 </div>
 
@@ -147,7 +147,7 @@ export const Contact: React.FC = () => {
                                         required
                                         rows={4}
                                         placeholder="Tell me about your project..."
-                                        className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
+                                        className="w-full px-4 py-3 rounded-xl bg-white/50 dark:bg-dark/60 border border-slate-200 dark:border-slate-900/50 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
                                     />
                                 </div>
 

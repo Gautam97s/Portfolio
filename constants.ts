@@ -51,12 +51,13 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 5,
-    title: "Vibes Music",
-    description: "A conceptual music streaming interface with spatial audio visualizations and collaborative playlists.",
-    tags: ["Vue.js", "Three.js", "Web Audio API"],
-    image: "https://picsum.photos/800/600?random=5",
-    link: "#",
-    github: "#"
+    title: "Verity",
+    description: "Autonomous AI business manager tailored for India's smallest businesses",
+    tags: ["React", "Tailwind", "Next.js", "Ai agents", "AI", "FastAPI"],
+    image: "/images/Verity.png",
+    link: "https://verity-eta.vercel.app/",
+    github: "https://github.com/Gautam97s/Verity",
+    isBuilding: true,
   },
   {
     id: 6,

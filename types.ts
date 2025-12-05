@@ -6,6 +6,7 @@ export interface Project {
   image: string;
   link: string;
   github: string;
+  isBuilding?: boolean;
 }
 
 export interface ExperienceItem {

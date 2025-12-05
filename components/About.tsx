@@ -129,7 +129,7 @@ export const About: React.FC = () => {
                     </div>
 
                     {/* RIGHT COLUMN */}
-                    <div className="glass-panel rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden bg-white/80 dark:bg-slate-900/60">
+                    <div className="glass-panel rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden bg-white/80 dark:bg-dark/60">
                         {/* Decorative background element - strictly behind content */}
                         <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 rounded-full blur-3xl z-0 pointer-events-none"></div>
 
@@ -144,14 +144,14 @@ export const About: React.FC = () => {
                             {SKILLS.map((skill) => (
                                 <span
                                     key={skill.name}
-                                    className="skill-pill px-4 py-2 bg-white/50 dark:bg-slate-800/50 border border-white/40 dark:border-slate-700 rounded-full text-sm font-medium hover:bg-white dark:hover:bg-slate-800 transition-colors cursor-default"
+                                    className="skill-pill px-4 py-2 bg-white/50 dark:bg-dark/40 border border-white/40 dark:border-slate-900/50 rounded-full text-sm font-medium hover:bg-white dark:hover:bg-dark/60 transition-colors cursor-default"
                                 >
                                     {skill.name}
                                 </span>
                             ))}
                         </div>
 
-                        <div className="mt-8 p-4 bg-orange-50 dark:bg-slate-800/80 rounded-2xl border border-orange-100 dark:border-slate-700 flex items-start gap-4 relative z-10">
+                        <div className="mt-8 p-4 bg-orange-50 dark:bg-dark/60 rounded-2xl border border-orange-100 dark:border-slate-900/50 flex items-start gap-4 relative z-10">
                             <div className="text-4xl">⚡</div>
 
                             <div>

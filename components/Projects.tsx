@@ -7,6 +7,7 @@ import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { SectionId } from '../types';
 import { PROJECTS } from '../constants';
 import { useRouter } from "next/navigation";
+import { Label } from './Label';
 
 interface ProjectsProps {
   limit?: number;
@@ -182,7 +183,7 @@ export const Projects: React.FC<ProjectsProps> = ({
   };
 
   return (
-    <section id={SectionId.PROJECTS} ref={containerRef} className="py-24 bg-slate-50/50 dark:bg-slate-900/50 min-h-screen">
+    <section id={SectionId.PROJECTS} ref={containerRef} className="py-24 bg-slate-50/50 dark:bg-dark/50 min-h-screen">
       <div className="container mx-auto px-8 md:px-12">
         <div className="mb-16 text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">{title}</h2>
@@ -195,7 +196,7 @@ export const Projects: React.FC<ProjectsProps> = ({
           {displayedProjects.map((project) => (
             <div
               key={project.id}
-              className="project-card group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm cursor-pointer opacity-0"
+              className="project-card group bg-white dark:bg-dark/80 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-900/50 shadow-sm cursor-pointer opacity-0"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
@@ -210,7 +211,10 @@ export const Projects: React.FC<ProjectsProps> = ({
 
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">{project.title}</h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">{project.title}</h3>
+                    {project.isBuilding && <Label />}
+                  </div>
                   <div className="flex gap-3">
                     <a
                       href={project.github}
@@ -243,7 +247,7 @@ export const Projects: React.FC<ProjectsProps> = ({
 
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map(tag => (
-                    <span key={tag} className="text-xs font-medium px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+                    <span key={tag} className="text-xs font-medium px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300">
                       {tag}
                     </span>
                   ))}
