@@ -69,11 +69,23 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                 e.preventDefault();
 
                 if (pathname !== "/") {
-                    // navigate to home route first to ensure target exists and page will unmount previous page
-                    // await ensures router push completes before we attempt to scroll
-                    await router.push("/");
-                    // small timeout to allow DOM to mount
-                    setTimeout(() => scrollToHash(href), 100);
+                    // navigate to home route with hash
+                    router.push(`/${href}`);
+                    // Wait for route change and DOM to be ready, then scroll
+                    setTimeout(() => {
+                        const el = document.querySelector(href);
+                        if (el) {
+                            el.scrollIntoView({ behavior: "smooth" });
+                        } else {
+                            // Retry if element not found yet
+                            setTimeout(() => {
+                                const retryEl = document.querySelector(href);
+                                if (retryEl) {
+                                    retryEl.scrollIntoView({ behavior: "smooth" });
+                                }
+                            }, 200);
+                        }
+                    }, 300);
                 } else {
                     // already on home, just scroll
                     scrollToHash(href);
@@ -118,9 +130,9 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-4" : "py-6"
                 }`}
         >
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6 max-w-5xl">
                 <nav
-                    className={`glass-panel rounded-full px-6 py-3 flex items-center justify-between shadow-lg transition-all duration-300 ${isScrolled ? "bg-opacity-90" : "bg-opacity-60"
+                    className={`glass-panel rounded-full px-4 md:px-6 py-3 flex items-center justify-between shadow-lg transition-all duration-300 ${isScrolled ? "bg-opacity-90" : "bg-opacity-60"
                         }`}
                 >
                     {/* Logo - use button/anchor that triggers router.push to "/" */}

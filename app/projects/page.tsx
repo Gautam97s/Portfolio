@@ -1,13 +1,15 @@
 // app/projects/page.tsx
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import { Projects } from "../../components/Projects"; // adjust path if your components folder is elsewhere
 
-export const metadata = {
-  title: "Projects — All Work",
-  description: "Browse all projects, case studies, and experiments.",
-};
-
 export default function ProjectsPage() {
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
   return (
     <div className="pt-20">
       <Projects

@@ -125,18 +125,23 @@ export const Projects: React.FC<ProjectsProps> = ({
       return;
     }
 
-    // Prefer full-page projects route if router is available
-    try {
-      if (router && typeof router.push === "function") {
-        router.push("/projects");
-        return;
-      }
-    } catch {
-      // ignore and fallback
+    // Always navigate to /projects when showViewAllButton is true
+    if (router) {
+      router.push("/projects");
+      // Scroll to top immediately
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      return;
     }
 
-    // Fallback: toggle expanded within the same page
-    setExpanded(prev => !prev);
+    // Fallback: toggle expanded within the same page (only if router is not available)
+    setExpanded(prev => {
+      const newExpanded = !prev;
+      // Scroll to top when expanding
+      if (newExpanded) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return newExpanded;
+    });
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
