@@ -9,6 +9,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Enhanced Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  /* Optional: Add scroll padding for fixed headers */
+  scroll-padding-top: 80px;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

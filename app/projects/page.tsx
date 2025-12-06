@@ -1,13 +1,16 @@
-// app/projects/page.tsx
 "use client";
 
 import React, { useEffect } from "react";
-import { Projects } from "../../components/Projects"; // adjust path if your components folder is elsewhere
+import { Projects } from "../../components/Projects";
+import { gsapSmoothScroll } from "@/lib/smoothScroll";
 
 export default function ProjectsPage() {
   useEffect(() => {
-    // Scroll to top when component mounts
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Scroll to top when component mounts using GSAP smooth scroll
+    gsapSmoothScroll(0, {
+      duration: 1,
+      ease: "power2.inOut"
+    });
   }, []);
 
   return (

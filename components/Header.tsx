@@ -6,6 +6,7 @@ import { Menu, X, Moon, Sun, Github, ArrowLeft } from "lucide-react";
 import { SectionId } from "../types";
 import { SITE_META } from "../constants";
 import { useRouter, usePathname } from "next/navigation";
+import { gsapSmoothScroll } from "@/lib/smoothScroll";
 
 interface HeaderProps {
     isDark: boolean;
@@ -51,10 +52,13 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
         { name: "Contact", href: `#${SectionId.CONTACT}` },
     ];
 
-    // helper: smooth scroll to a hash on the current page
+    // helper: smooth scroll to a hash on the current page using GSAP
     const scrollToHash = (hash: string) => {
-        const el = document.querySelector(hash);
-        if (el) (el as HTMLElement).scrollIntoView({ behavior: "smooth" });
+        gsapSmoothScroll(hash, {
+            duration: 1.2,
+            offset: 80, // Account for fixed header
+            ease: "power2.inOut"
+        });
     };
 
     // Robust nav click handler:
@@ -71,20 +75,13 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                 if (pathname !== "/") {
                     // navigate to home route with hash
                     router.push(`/${href}`);
-                    // Wait for route change and DOM to be ready, then scroll
+                    // Wait for route change and DOM to be ready, then scroll with GSAP
                     setTimeout(() => {
-                        const el = document.querySelector(href);
-                        if (el) {
-                            el.scrollIntoView({ behavior: "smooth" });
-                        } else {
-                            // Retry if element not found yet
-                            setTimeout(() => {
-                                const retryEl = document.querySelector(href);
-                                if (retryEl) {
-                                    retryEl.scrollIntoView({ behavior: "smooth" });
-                                }
-                            }, 200);
-                        }
+                        gsapSmoothScroll(href, {
+                            duration: 1.2,
+                            offset: 80,
+                            ease: "power2.inOut"
+                        });
                     }, 300);
                 } else {
                     // already on home, just scroll
@@ -107,14 +104,22 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
             e.preventDefault();
             setIsMenuOpen(false);
 
-            // If already on root, just scroll to top
+            // If already on root, just scroll to top using GSAP
             if (pathname === "/") {
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                gsapSmoothScroll(0, {
+                    duration: 1,
+                    ease: "power2.inOut"
+                });
                 return;
             }
 
             await router.push("/");
-            setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 80);
+            setTimeout(() => {
+                gsapSmoothScroll(0, {
+                    duration: 1,
+                    ease: "power2.inOut"
+                });
+            }, 80);
         },
         [router, pathname]
     );

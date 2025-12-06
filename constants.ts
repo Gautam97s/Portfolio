@@ -52,7 +52,7 @@ export const PROJECTS: Project[] = [
   {
     id: 5,
     title: "Verity",
-    description: "Autonomous AI business manager tailored for India's smallest businesses",
+    description: "Autonomous AI business manager tailored for India's MSME businesses",
     tags: ["React", "Tailwind", "Next.js", "Ai agents", "AI", "FastAPI"],
     image: "/images/Verity.png",
     link: "https://verity-eta.vercel.app/",
