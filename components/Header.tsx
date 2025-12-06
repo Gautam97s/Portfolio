@@ -53,8 +53,8 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
     ];
 
     // helper: smooth scroll to a hash on the current page using GSAP
-    const scrollToHash = (hash: string) => {
-        gsapSmoothScroll(hash, {
+    const scrollToHash = async (hash: string) => {
+        await gsapSmoothScroll(hash, {
             duration: 1.2,
             offset: 80, // Account for fixed header
             ease: "power2.inOut"
@@ -73,11 +73,11 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                 e.preventDefault();
 
                 if (pathname !== "/") {
-                    // navigate to home route with hash
-                    router.push(`/${href}`);
+                    // Navigate to home route first (without hash in path)
+                    await router.push("/");
                     // Wait for route change and DOM to be ready, then scroll with GSAP
-                    setTimeout(() => {
-                        gsapSmoothScroll(href, {
+                    setTimeout(async () => {
+                        await gsapSmoothScroll(href, {
                             duration: 1.2,
                             offset: 80,
                             ease: "power2.inOut"
@@ -85,7 +85,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                     }, 300);
                 } else {
                     // already on home, just scroll
-                    scrollToHash(href);
+                    await scrollToHash(href);
                 }
 
                 return;
@@ -106,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
 
             // If already on root, just scroll to top using GSAP
             if (pathname === "/") {
-                gsapSmoothScroll(0, {
+                await gsapSmoothScroll(0, {
                     duration: 1,
                     ease: "power2.inOut"
                 });
@@ -114,8 +114,8 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
             }
 
             await router.push("/");
-            setTimeout(() => {
-                gsapSmoothScroll(0, {
+            setTimeout(async () => {
+                await gsapSmoothScroll(0, {
                     duration: 1,
                     ease: "power2.inOut"
                 });

@@ -7,10 +7,12 @@ import { gsapSmoothScroll } from "@/lib/smoothScroll";
 export default function ProjectsPage() {
   useEffect(() => {
     // Scroll to top when component mounts using GSAP smooth scroll
-    gsapSmoothScroll(0, {
-      duration: 1,
-      ease: "power2.inOut"
-    });
+    (async () => {
+      await gsapSmoothScroll(0, {
+        duration: 1,
+        ease: "power2.inOut"
+      });
+    })();
   }, []);
 
   return (

@@ -36,9 +36,10 @@ export const Projects: React.FC<ProjectsProps> = ({
 
   useEffect(() => {
     let ctx: gsap.Context | undefined;
+    let timer: NodeJS.Timeout | undefined;
 
     // Use a small timeout to ensure DOM is ready when switching views
-    const timer = setTimeout(() => {
+    timer = setTimeout(() => {
       if (!containerRef.current) return;
 
       ctx = gsap.context(() => {
@@ -68,8 +69,14 @@ export const Projects: React.FC<ProjectsProps> = ({
     }, 50);
 
     return () => {
-      clearTimeout(timer);
-      if (ctx) ctx.revert();
+      // Clear timeout if component unmounts before it executes
+      if (timer) {
+        clearTimeout(timer);
+      }
+      // Cleanup GSAP context if it was created
+      if (ctx) {
+        ctx.revert();
+      }
     };
   }, [displayedProjects]); // Re-run when the list of projects changes
 
@@ -118,7 +125,7 @@ export const Projects: React.FC<ProjectsProps> = ({
   };
 
   // SINGLE handleViewAllClick implementation (no duplicate)
-  const handleViewAllClick = () => {
+  const handleViewAllClick = async () => {
     if (onViewAll) {
       // If parent gave a handler, use it
       onViewAll();
@@ -127,9 +134,12 @@ export const Projects: React.FC<ProjectsProps> = ({
 
     // Always navigate to /projects when showViewAllButton is true
     if (router) {
-      router.push("/projects");
-      // Scroll to top immediately
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      await router.push("/projects");
+      // Wait for navigation to complete, then scroll to top
+      // Use 'auto' for immediate scrolling (valid ScrollBehavior value)
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }, 100);
       return;
     }
 

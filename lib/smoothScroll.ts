@@ -80,17 +80,38 @@ export const easingFunctions = {
   easeOutQuad: (t: number) => t * (2 - t),
   easeInOutQuad: (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t),
   easeInCubic: (t: number) => t * t * t,
-  easeOutCubic: (t: number) => --t * t * t + 1,
+  easeOutCubic: (t: number) => {
+    const u = 1 - t;
+    return 1 - u * u * u;
+  },
   easeInOutCubic: (t: number) =>
     t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
   easeInQuart: (t: number) => t * t * t * t,
-  easeOutQuart: (t: number) => 1 - --t * t * t * t,
-  easeInOutQuart: (t: number) =>
-    t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t,
+  easeOutQuart: (t: number) => {
+    const u = 1 - t;
+    return 1 - u * u * u * u;
+  },
+  easeInOutQuart: (t: number) => {
+    if (t < 0.5) {
+      return 8 * t * t * t * t;
+    } else {
+      const u = 1 - t;
+      return 1 - 8 * u * u * u * u;
+    }
+  },
   easeInQuint: (t: number) => t * t * t * t * t,
-  easeOutQuint: (t: number) => 1 + --t * t * t * t * t,
-  easeInOutQuint: (t: number) =>
-    t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t,
+  easeOutQuint: (t: number) => {
+    const u = 1 - t;
+    return 1 - u * u * u * u * u;
+  },
+  easeInOutQuint: (t: number) => {
+    if (t < 0.5) {
+      return 16 * t * t * t * t * t;
+    } else {
+      const u = 1 - t;
+      return 1 - 16 * u * u * u * u * u;
+    }
+  },
 };
 
 export function customSmoothScroll(
@@ -189,9 +210,12 @@ export async function gsapSmoothScroll(
         return;
       }
       const rect = element.getBoundingClientRect();
+      // Apply offset only for element selectors (to account for fixed headers)
       targetY = rect.top + window.pageYOffset - offset;
     } else {
-      targetY = target - offset;
+      // For numeric targets (absolute positions), don't apply offset
+      // Offset is only meaningful when scrolling to elements
+      targetY = Math.max(0, target); // Ensure non-negative
     }
 
     // Method 1: Use ScrollToPlugin if available (premium)

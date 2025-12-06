@@ -75,7 +75,7 @@ export function useSmoothScroll() {
 
   // Method 5: GSAP smooth scroll (advanced)
   const gsapScroll = useCallback(
-    (
+    async (
       target: string | number,
       options?: {
         duration?: number;
@@ -83,7 +83,7 @@ export function useSmoothScroll() {
         ease?: string;
       }
     ) => {
-      gsapSmoothScroll(target, options);
+      await gsapSmoothScroll(target, options);
     },
     []
   );

@@ -74,11 +74,11 @@ export const Hero: React.FC = () => {
         <section
             id={SectionId.HERO}
             ref={containerRef}
-            className="min-h-screen flex items-center pt-20 relative"
+            className="min-h-screen flex items-center pt-24 md:pt-20 relative"
         >
             <div className="container mx-auto px-8 md:px-12 relative z-10">
                 <div className="max-w-3xl">
-                    <div className="inline-block mb-4 px-3 py-1 rounded-full bg-primary/20 text-teal-700 dark:text-teal-300 text-sm font-semibold tracking-wide backdrop-blur-sm border border-primary/20">
+                    <div className="inline-block mb-4 mt-4 md:mt-0 px-3 py-1 rounded-full bg-primary/20 text-teal-700 dark:text-teal-300 text-sm font-semibold tracking-wide backdrop-blur-sm border border-primary/20">
                         Available for freelance
                     </div>
 
