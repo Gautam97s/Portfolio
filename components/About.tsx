@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { SectionId } from "../types";
 import { SKILLS } from "../constants";
+import { SpotifyCard } from "./SpotifyCard";
 
 export const About: React.FC = () => {
     const containerRef = useRef<HTMLDivElement | null>(null);
@@ -162,6 +163,11 @@ export const About: React.FC = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                {/* Spotify Card */}
+                <div className="mt-12">
+                    <SpotifyCard />
                 </div>
             </div>
         </section>

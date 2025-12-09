@@ -78,7 +78,7 @@ export const Hero: React.FC = () => {
         >
             <div className="container mx-auto px-8 md:px-12 relative z-10">
                 <div className="max-w-3xl">
-                    <div className="inline-block mb-4 mt-4 md:mt-0 px-3 py-1 rounded-full bg-primary/20 text-teal-700 dark:text-teal-300 text-sm font-semibold tracking-wide backdrop-blur-sm border border-primary/20">
+                    <div className="inline-block mb-4 mt-4 md:mt-5 px-3 py-1 rounded-full bg-primary/20 text-teal-700 dark:text-teal-300 text-sm font-semibold tracking-wide backdrop-blur-sm border border-primary/20">
                         Available for freelance
                     </div>
 
@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
                         className="font-display font-bold text-6xl md:text-8xl leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-slate-400"
                     >
                         Turning <br />
-                        <span className="italic font-serif text-slate-800 dark:text-slate-100">ideas <br />
+                        <span className="italic font-serif text-slate-800 dark:text-slate-100"> ideas <br />
                             into products.</span>
                     </h1>
 
