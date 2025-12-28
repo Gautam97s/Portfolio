@@ -1,13 +1,20 @@
-// app/projects/page.tsx
-import React from "react";
-import { Projects } from "../../components/Projects"; // adjust path if your components folder is elsewhere
+"use client";
 
-export const metadata = {
-  title: "Projects — All Work",
-  description: "Browse all projects, case studies, and experiments.",
-};
+import React, { useEffect } from "react";
+import { Projects } from "../../components/Projects";
+import { gsapSmoothScroll } from "@/lib/smoothScroll";
 
 export default function ProjectsPage() {
+  useEffect(() => {
+    // Scroll to top when component mounts using GSAP smooth scroll
+    (async () => {
+      await gsapSmoothScroll(0, {
+        duration: 1,
+        ease: "power2.inOut"
+      });
+    })();
+  }, []);
+
   return (
     <div className="pt-20">
       <Projects

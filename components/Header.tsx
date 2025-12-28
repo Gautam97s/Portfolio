@@ -6,6 +6,7 @@ import { Menu, X, Moon, Sun, Github, ArrowLeft } from "lucide-react";
 import { SectionId } from "../types";
 import { SITE_META } from "../constants";
 import { useRouter, usePathname } from "next/navigation";
+import { gsapSmoothScroll } from "@/lib/smoothScroll";
 
 interface HeaderProps {
     isDark: boolean;
@@ -51,10 +52,13 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
         { name: "Contact", href: `#${SectionId.CONTACT}` },
     ];
 
-    // helper: smooth scroll to a hash on the current page
-    const scrollToHash = (hash: string) => {
-        const el = document.querySelector(hash);
-        if (el) (el as HTMLElement).scrollIntoView({ behavior: "smooth" });
+    // helper: smooth scroll to a hash on the current page using GSAP
+    const scrollToHash = async (hash: string) => {
+        await gsapSmoothScroll(hash, {
+            duration: 1.2,
+            offset: 80, // Account for fixed header
+            ease: "power2.inOut"
+        });
     };
 
     // Robust nav click handler:
@@ -69,14 +73,19 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                 e.preventDefault();
 
                 if (pathname !== "/") {
-                    // navigate to home route first to ensure target exists and page will unmount previous page
-                    // await ensures router push completes before we attempt to scroll
+                    // Navigate to home route first (without hash in path)
                     await router.push("/");
-                    // small timeout to allow DOM to mount
-                    setTimeout(() => scrollToHash(href), 100);
+                    // Wait for route change and DOM to be ready, then scroll with GSAP
+                    setTimeout(async () => {
+                        await gsapSmoothScroll(href, {
+                            duration: 1.2,
+                            offset: 80,
+                            ease: "power2.inOut"
+                        });
+                    }, 300);
                 } else {
                     // already on home, just scroll
-                    scrollToHash(href);
+                    await scrollToHash(href);
                 }
 
                 return;
@@ -95,14 +104,22 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
             e.preventDefault();
             setIsMenuOpen(false);
 
-            // If already on root, just scroll to top
+            // If already on root, just scroll to top using GSAP
             if (pathname === "/") {
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                await gsapSmoothScroll(0, {
+                    duration: 1,
+                    ease: "power2.inOut"
+                });
                 return;
             }
 
             await router.push("/");
-            setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 80);
+            setTimeout(async () => {
+                await gsapSmoothScroll(0, {
+                    duration: 1,
+                    ease: "power2.inOut"
+                });
+            }, 80);
         },
         [router, pathname]
     );
@@ -118,9 +135,9 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "py-4" : "py-6"
                 }`}
         >
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6 max-w-5xl">
                 <nav
-                    className={`glass-panel rounded-full px-6 py-3 flex items-center justify-between shadow-lg transition-all duration-300 ${isScrolled ? "bg-opacity-90" : "bg-opacity-60"
+                    className={`glass-panel rounded-full px-4 md:px-6 py-3 flex items-center justify-between shadow-lg transition-all duration-300 ${isScrolled ? "bg-opacity-90" : "bg-opacity-60"
                         }`}
                 >
                     {/* Logo - use button/anchor that triggers router.push to "/" */}
@@ -164,7 +181,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                             ))}
                         </ul>
 
-                        <div className="w-px h-6 bg-slate-300 dark:bg-slate-700 mx-4"></div>
+                        <div className="w-px h-6 bg-slate-300 dark:bg-slate-800 mx-4"></div>
 
                         <div className="flex items-center space-x-4">
                             <a
@@ -179,7 +196,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
 
                             <button
                                 onClick={toggleTheme}
-                                className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+                                className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
                                 aria-label="Toggle Theme"
                             >
                                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -214,7 +231,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-lg font-medium py-2 border-b border-slate-200 dark:border-slate-700 last:border-0 hover:text-primary hover:pl-2 transition-all"
+                                    className="text-lg font-medium py-2 border-b border-slate-200 dark:border-slate-900/50 last:border-0 hover:text-primary hover:pl-2 transition-all"
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     {link.name}
@@ -224,7 +241,7 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                                     key={link.name}
                                     href={link.href}
                                     onClick={(e) => onMobileLink(e, link.href)}
-                                    className="text-lg font-medium py-2 border-b border-slate-200 dark:border-slate-700 last:border-0 hover:text-primary hover:pl-2 transition-all"
+                                    className="text-lg font-medium py-2 border-b border-slate-200 dark:border-slate-900/50 last:border-0 hover:text-primary hover:pl-2 transition-all"
                                 >
                                     {link.name}
                                 </a>

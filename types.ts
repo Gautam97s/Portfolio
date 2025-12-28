@@ -6,6 +6,7 @@ export interface Project {
   image: string;
   link: string;
   github: string;
+  isBuilding?: boolean;
 }
 
 export interface ExperienceItem {
@@ -18,7 +19,7 @@ export interface ExperienceItem {
 
 export interface Skill {
   name: string;
-  category: 'frontend' | 'backend' | 'tools';
+  category: 'frontend' | 'backend' | 'tools' | 'Machine Learning';
 }
 
 export enum SectionId {

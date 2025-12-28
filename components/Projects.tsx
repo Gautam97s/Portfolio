@@ -7,6 +7,7 @@ import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { SectionId } from '../types';
 import { PROJECTS } from '../constants';
 import { useRouter } from "next/navigation";
+import { Label } from './Label';
 
 interface ProjectsProps {
   limit?: number;
@@ -30,10 +31,18 @@ export const Projects: React.FC<ProjectsProps> = ({
   const displayedProjects = (limit && !expanded) ? PROJECTS.slice(0, limit) : PROJECTS;
   const shouldShowButton = showViewAllButton && limit && PROJECTS.length > limit;
 
+  // Register ScrollTrigger to ensure it's linked to GSAP
+  gsap.registerPlugin(ScrollTrigger);
+
   useEffect(() => {
+    let ctx: gsap.Context | undefined;
+    let timer: NodeJS.Timeout | undefined;
+
     // Use a small timeout to ensure DOM is ready when switching views
-    const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
+    timer = setTimeout(() => {
+      if (!containerRef.current) return;
+
+      ctx = gsap.context(() => {
         const cards = gsap.utils.toArray('.project-card');
 
         // Reset any previous GSAP settings
@@ -57,11 +66,18 @@ export const Projects: React.FC<ProjectsProps> = ({
           once: true
         });
       }, containerRef);
-
-      return () => ctx.revert();
     }, 50);
 
-    return () => clearTimeout(timer);
+    return () => {
+      // Clear timeout if component unmounts before it executes
+      if (timer) {
+        clearTimeout(timer);
+      }
+      // Cleanup GSAP context if it was created
+      if (ctx) {
+        ctx.revert();
+      }
+    };
   }, [displayedProjects]); // Re-run when the list of projects changes
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -109,25 +125,33 @@ export const Projects: React.FC<ProjectsProps> = ({
   };
 
   // SINGLE handleViewAllClick implementation (no duplicate)
-  const handleViewAllClick = () => {
+  const handleViewAllClick = async () => {
     if (onViewAll) {
       // If parent gave a handler, use it
       onViewAll();
       return;
     }
 
-    // Prefer full-page projects route if router is available
-    try {
-      if (router && typeof router.push === "function") {
-        router.push("/projects");
-        return;
-      }
-    } catch {
-      // ignore and fallback
+    // Always navigate to /projects when showViewAllButton is true
+    if (router) {
+      await router.push("/projects");
+      // Wait for navigation to complete, then scroll to top
+      // Use 'auto' for immediate scrolling (valid ScrollBehavior value)
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }, 100);
+      return;
     }
 
-    // Fallback: toggle expanded within the same page
-    setExpanded(prev => !prev);
+    // Fallback: toggle expanded within the same page (only if router is not available)
+    setExpanded(prev => {
+      const newExpanded = !prev;
+      // Scroll to top when expanding
+      if (newExpanded) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return newExpanded;
+    });
   };
 
   const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -174,7 +198,7 @@ export const Projects: React.FC<ProjectsProps> = ({
   };
 
   return (
-    <section id={SectionId.PROJECTS} ref={containerRef} className="py-24 bg-slate-50/50 dark:bg-slate-900/50 min-h-screen">
+    <section id={SectionId.PROJECTS} ref={containerRef} className="py-24 bg-slate-50/50 dark:bg-dark/50 min-h-screen">
       <div className="container mx-auto px-8 md:px-12">
         <div className="mb-16 text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">{title}</h2>
@@ -187,7 +211,7 @@ export const Projects: React.FC<ProjectsProps> = ({
           {displayedProjects.map((project) => (
             <div
               key={project.id}
-              className="project-card group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-700 shadow-sm cursor-pointer opacity-0"
+              className="project-card group bg-white dark:bg-dark/80 rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-900/50 shadow-sm cursor-pointer opacity-0"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
@@ -202,7 +226,10 @@ export const Projects: React.FC<ProjectsProps> = ({
 
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">{project.title}</h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">{project.title}</h3>
+                    {project.isBuilding && <Label />}
+                  </div>
                   <div className="flex gap-3">
                     <a
                       href={project.github}
@@ -235,7 +262,7 @@ export const Projects: React.FC<ProjectsProps> = ({
 
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map(tag => (
-                    <span key={tag} className="text-xs font-medium px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">
+                    <span key={tag} className="text-xs font-medium px-2 py-1 rounded-md bg-slate-100 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300">
                       {tag}
                     </span>
                   ))}

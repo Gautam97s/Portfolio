@@ -16,7 +16,7 @@ module.exports = {
         primary: "#99f6e4",
         secondary: "#ddd6fe",
         accent: "#fed7aa",
-        dark: "#0f172a",
+        dark: "#0B0C0D",
         light: "#f8fafc",
       },
       animation: {

@@ -74,11 +74,11 @@ export const Hero: React.FC = () => {
         <section
             id={SectionId.HERO}
             ref={containerRef}
-            className="min-h-screen flex items-center pt-20 relative"
+            className="min-h-screen flex items-center pt-24 md:pt-20 relative"
         >
             <div className="container mx-auto px-8 md:px-12 relative z-10">
                 <div className="max-w-3xl">
-                    <div className="inline-block mb-4 px-3 py-1 rounded-full bg-primary/20 text-teal-700 dark:text-teal-300 text-sm font-semibold tracking-wide backdrop-blur-sm border border-primary/20">
+                    <div className="inline-block mb-4 mt-4 md:mt-5 px-3 py-1 rounded-full bg-primary/20 text-teal-700 dark:text-teal-300 text-sm font-semibold tracking-wide backdrop-blur-sm border border-primary/20">
                         Available for freelance
                     </div>
 
@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
                         className="font-display font-bold text-6xl md:text-8xl leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-slate-400"
                     >
                         Turning <br />
-                        <span className="italic font-serif text-slate-800 dark:text-slate-100">ideas <br />
+                        <span className="italic font-serif text-slate-800 dark:text-slate-100"> ideas <br />
                             into products.</span>
                     </h1>
 
@@ -96,7 +96,7 @@ export const Hero: React.FC = () => {
                         ref={textRef}
                         className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-xl leading-relaxed"
                     >
-                        {SITE_META.tagline} I'm {SITE_META.name}, a {SITE_META.role} multidisciplinary developer crafting thoughtful, modern products.
+                        {SITE_META.tagline} I'm {SITE_META.name}, and I like creating modern products that can address real issues.
                     </p>
 
                     <div ref={btnRef} className="flex flex-wrap gap-4">

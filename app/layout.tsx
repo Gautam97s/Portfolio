@@ -20,13 +20,24 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  // load GSAP once
+  // load GSAP once and register plugins
   useEffect(() => {
     (async () => {
       try {
         const gsapModule = await import("gsap");
+        const gsap = gsapModule.gsap || gsapModule.default || gsapModule;
         const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-        gsapModule.gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Try to register ScrollToPlugin if available
+        try {
+          const { ScrollToPlugin } = await import("gsap/ScrollToPlugin");
+          if (ScrollToPlugin) {
+            gsap.registerPlugin(ScrollToPlugin);
+          }
+        } catch {
+          // ScrollToPlugin might not be available or already registered
+        }
       } catch { }
     })();
   }, []);

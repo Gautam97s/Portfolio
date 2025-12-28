@@ -9,6 +9,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Enhanced Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+  /* Optional: Add scroll padding for fixed headers */
+  scroll-padding-top: 80px;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -24,7 +46,7 @@ body {
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: #1e293b;
 }
 
 /* glass panel */
@@ -36,8 +58,8 @@ body {
 }
 
 .dark .glass-panel {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(11, 12, 13, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* blob animation delays */
@@ -47,4 +69,18 @@ body {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+/* blinking dot animation */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.blink-dot {
+  animation: blink 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
