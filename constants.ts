@@ -61,63 +61,64 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 6,
-    title: "Botanica",
-    description: "E-commerce platform for rare indoor plants featuring AR placement preview and detailed care guides.",
+    title: "Kairo",
+    description: "Its an AI scheduler for your daily life",
     tags: ["Shopify", "React", "WebXR"],
-    image: "https://picsum.photos/800/600?random=6",
-    link: "#",
-    github: "#"
+    image: "/images/Kairo.png",
+    link: "https://github.com/Gautam97s/Kairo/tree/main",
+    github: "https://github.com/Gautam97s/Kairo/tree/main",
+    isBuilding: true,
   },
-  {
-    id: 7,
-    title: "Pixel Editor",
-    description: "Browser-based image manipulation tool with layer support, filters, and export capabilities.",
-    tags: ["Canvas API", "WebAssembly", "Rust"],
-    image: "https://picsum.photos/800/600?random=7",
-    link: "#",
-    github: "#"
-  },
-  {
-    id: 8,
-    title: "Nomad Stay",
-    description: "Booking platform for digital nomads offering curated stays with verified internet speeds.",
-    tags: ["Next.js", "Supabase", "Stripe"],
-    image: "https://picsum.photos/800/600?random=8",
-    link: "#",
-    github: "#"
-  },
-  {
-    id: 9,
-    title: "Kickflip",
-    description: "A modern and sleek portfolio website template built with React, Tailwind CSS, and GSAP for smooth animations.",
-    tags: ["React", "Tailwind", "GSAP"],
-    image: "https://picsum.photos/800/600?random=9",
-    link: "#",
-    github: "#"
-  }
+  // {
+  //   id: 7,
+  //   title: "Pixel Editor",
+  //   description: "Browser-based image manipulation tool with layer support, filters, and export capabilities.",
+  //   tags: ["Canvas API", "WebAssembly", "Rust"],
+  //   image: "https://picsum.photos/800/600?random=7",
+  //   link: "#",
+  //   github: "#"
+  // },
+  // {
+  //   id: 8,
+  //   title: "Nomad Stay",
+  //   description: "Booking platform for digital nomads offering curated stays with verified internet speeds.",
+  //   tags: ["Next.js", "Supabase", "Stripe"],
+  //   image: "https://picsum.photos/800/600?random=8",
+  //   link: "#",
+  //   github: "#"
+  // },
+  // {
+  //   id: 9,
+  //   title: "Kickflip",
+  //   description: "A modern and sleek portfolio website template built with React, Tailwind CSS, and GSAP for smooth animations.",
+  //   tags: ["React", "Tailwind", "GSAP"],
+  //   image: "https://picsum.photos/800/600?random=9",
+  //   link: "#",
+  //   github: "#"
+  // }
 ];
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
     id: 1,
-    year: "2023 - Present",
-    role: "Student Frontend Engineer",
-    company: "TF",
-    description: "loading..."
+    year: "present",
+    role: "Developer",
+    company: "Freelance",
+    description: "Working for a client to build E-commerece Jewelery Website"
   },
   {
     id: 2,
-    year: "2021 - 2023",
+    year: "2025",
     role: "Frontend Developer",
-    company: "Creative Agency",
-    description: "loading..."
+    company: "Self Project",
+    description: "Developed TheStore, a fast and secure Next.js cloud drive with OTP modal for quick and safe access."
   },
   {
     id: 3,
-    year: "2019 - 2021",
-    role: "student",
-    company: "StartUp Lab",
-    description: "loading..."
+    year: "2025",
+    role: "Full Stack Developer",
+    company: "Self project",
+    description: "worked on IGNIS AI, a full-stack computer vision system that detects fire and smoke using YOLO, FastAPI, and a modern React dashboard."
   }
 ];
 

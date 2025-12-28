@@ -23,8 +23,11 @@ export const SpotifyCard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [deviceReady, setDeviceReady] = useState(false);
+  const [positionMs, setPositionMs] = useState(0);
+  const [durationMs, setDurationMs] = useState(0);
   const { player, deviceId, isReady } = useSpotifyPlayer();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Wait a bit after isReady becomes true to ensure device is fully registered
   useEffect(() => {
@@ -109,6 +112,8 @@ export const SpotifyCard: React.FC = () => {
     const updatePlayerState = (state: any) => {
       if (state) {
         setIsPlaying(!state.paused);
+        setPositionMs(state.position ?? 0);
+        setDurationMs(state.duration ?? 0);
       }
     };
 
@@ -125,6 +130,59 @@ export const SpotifyCard: React.FC = () => {
       setIsPlaying(!!track.isPlaying);
     }
   }, [track]);
+
+  // Track progress for preview audio fallback
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleTimeUpdate = () => {
+      setPositionMs(Math.floor((audio.currentTime || 0) * 1000));
+      setDurationMs(Math.floor((audio.duration || 0) * 1000));
+    };
+
+    const handleLoaded = () => {
+      setDurationMs(Math.floor((audio.duration || 0) * 1000));
+    };
+
+    audio.addEventListener("timeupdate", handleTimeUpdate);
+    audio.addEventListener("loadedmetadata", handleLoaded);
+
+    return () => {
+      audio.removeEventListener("timeupdate", handleTimeUpdate);
+      audio.removeEventListener("loadedmetadata", handleLoaded);
+    };
+  }, [audioRef.current]);
+
+  // Optional: gently advance progress using SDK state while playing
+  useEffect(() => {
+    if (!isPlaying || !durationMs) {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
+      return;
+    }
+
+    progressIntervalRef.current = setInterval(() => {
+      setPositionMs((prev) => Math.min(prev + 500, durationMs));
+    }, 500);
+
+    return () => {
+      if (progressIntervalRef.current) {
+        clearInterval(progressIntervalRef.current);
+        progressIntervalRef.current = null;
+      }
+    };
+  }, [isPlaying, durationMs]);
+
+  const formatTime = (ms: number) => {
+    if (!ms || Number.isNaN(ms)) return "0:00";
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
 
   // Cleanup audio on unmount
   useEffect(() => {
@@ -235,7 +293,13 @@ export const SpotifyCard: React.FC = () => {
   const canUseWebPlayback = deviceReady && deviceId && track?.uri && player;
   const hasPreview = !!track?.previewUrl;
   const isActionDisabled = !track || (!canUseWebPlayback && !hasPreview);
-
+  const progressPercent =
+    durationMs > 0 ? Math.min(100, (positionMs / durationMs) * 100) : 0;
+  
+  // Only show progress card when music is playing through our web player or preview audio
+  const isPlayingLocally =
+    isPlaying &&
+    ((player && durationMs > 0) || (hasPreview && audioRef.current && !audioRef.current.paused));
 
   if (error || !track) {
     return null; // Don't show anything if there's an error
@@ -244,8 +308,10 @@ export const SpotifyCard: React.FC = () => {
   return (
     <section className="py-12">
       <div className="container mx-auto px-8 md:px-12 max-w-4xl">
-        <div className="glass-panel rounded-2xl p-6 border border-slate-100 dark:border-slate-900/50 shadow-sm hover:border-primary/50 transition-colors">
-          <div className="flex items-center gap-4">
+        <div className="relative">
+          {/* Base card */}
+          <div className="glass-panel rounded-2xl p-6 border border-slate-100 dark:border-slate-900/50 shadow-sm hover:border-accent/50 dark:hover:border-primary/50 transition-colors relative z-10">
+            <div className="flex items-center gap-4">
             {/* Album Cover */}
             <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-slate-200 dark:bg-slate-800">
               {track.albumImageUrl ? (
@@ -264,11 +330,11 @@ export const SpotifyCard: React.FC = () => {
             {/* Song Info */}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-semibold text-primary">
+                <span className="text-xs font-semibold text-accent dark:text-primary">
                   {track.isPlaying ? "Now Playing" : "Last Played"}
                 </span>
                 {track.isPlaying && (
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-accent dark:bg-primary animate-pulse" />
                 )}
               </div>
               <h3 className="font-semibold text-slate-900 dark:text-white truncate">
@@ -283,7 +349,7 @@ export const SpotifyCard: React.FC = () => {
             <button
               onClick={handleTogglePlay}
               disabled={isActionDisabled}
-              className={`w-10 h-10 rounded-full bg-primary/20 hover:bg-primary/30 dark:bg-primary/10 dark:hover:bg-primary/20 flex items-center justify-center transition-colors flex-shrink-0 group ${
+              className={`w-10 h-10 rounded-full bg-dark hover:bg-dark/80 dark:bg-primary/10 dark:hover:bg-primary/20 flex items-center justify-center transition-colors flex-shrink-0 group ${
                 isActionDisabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
               }`}
               aria-label={
@@ -294,10 +360,10 @@ export const SpotifyCard: React.FC = () => {
                   : `Open ${track.title} on Spotify`
               }
             >
-              {isPlaying ? (
+              {isPlayingLocally ? (
                 <Pause
                   size={18}
-                  className={`text-primary transition-transform ${
+                  className={`text-accent dark:text-primary transition-transform ${
                     !isActionDisabled ? "group-hover:scale-110" : ""
                   }`}
                   strokeWidth={2.5}
@@ -305,13 +371,42 @@ export const SpotifyCard: React.FC = () => {
               ) : (
                 <Play
                   size={18}
-                  className={`text-primary ml-0.5 transition-transform ${
+                  className={`text-accent dark:text-primary ml-0.5 transition-transform ${
                     !isActionDisabled ? "group-hover:scale-110" : ""
                   }`}
                   fill="currentColor"
                 />
               )}
             </button>
+          </div>
+        </div>
+
+          {/* Sliding player overlay - only show when playing locally */}
+          <div
+            className={`absolute left-3 right-3 mt-2 transition-all duration-300 ${
+              isPlayingLocally
+                ? "translate-y-4 opacity-100"
+                : "translate-y-0 opacity-0 pointer-events-none"
+            }`}
+          >
+            <div className="rounded-xl bg-white border border-slate-200 hover:border-accent/50 dark:hover:border-primary/50 shadow-xl shadow-slate-300/40 px-4 py-3 dark:bg-dark/85 dark:border-slate-900/60 dark:shadow-black/50">
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 w-10 tabular-nums">
+                  {formatTime(positionMs)}
+                </span>
+
+                <div className="relative flex-1 h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
+                  <div
+                    className="absolute left-0 top-0 h-full bg-accent/70 dark:bg-primary"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
+
+                <span className="text-xs font-medium text-slate-500 dark:text-slate-400 w-10 text-right tabular-nums">
+                  {formatTime(durationMs)}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
