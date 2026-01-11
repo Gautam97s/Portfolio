@@ -91,7 +91,7 @@ export const Contact: React.FC = () => {
 
                                 <div className="flex items-center gap-4">
                                     <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-[#0A66C2] dark:text-orange-300">
-                                        In
+                                        in
                                     </div>
                                     <a
                                         href={SITE_META.socials.linkedin}
