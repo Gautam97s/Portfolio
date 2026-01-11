@@ -96,10 +96,10 @@ export const Timeline: React.FC = () => {
     return () => {
       try {
         ctx?.revert();
-      } catch {}
+      } catch { }
       try {
         ScrollTriggerModule?.getAll?.()?.forEach((t: any) => t.kill?.());
-      } catch {}
+      } catch { }
     };
   }, [reducedMotion]);
 
@@ -109,19 +109,16 @@ export const Timeline: React.FC = () => {
         <h2 className="text-3xl font-display font-bold mb-12 text-center">Experience</h2>
 
         <div className="relative pl-8 md:pl-0">
-          {/* Desktop central line */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800 transform -translate-x-1/2">
+          {/* Vertical Line (Responsive) */}
+          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800 md:transform md:-translate-x-1/2">
             <div ref={lineRef} className="w-full bg-primary absolute top-0 left-0 h-full origin-top"></div>
           </div>
-
-          {/* Mobile left line */}
-          <div className="md:hidden absolute left-4 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-800"></div>
 
           <div className="space-y-12">
             {EXPERIENCE.map((item, index) => (
               <div
                 key={item.id}
-                className={`timeline-item flex flex-col md:flex-row items-center justify-between gap-8 ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}
+                className={`timeline-item relative flex flex-col md:flex-row items-center justify-between gap-8 ${index % 2 === 0 ? "md:flex-row-reverse" : ""}`}
               >
                 <div className="w-full md:w-5/12">
                   <div className="glass-panel p-6 rounded-2xl border border-slate-100 dark:border-slate-900/50 shadow-sm hover:border-primary/50 transition-colors">
@@ -135,7 +132,7 @@ export const Timeline: React.FC = () => {
                 </div>
 
                 {/* Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-white dark:bg-dark border-4 border-primary rounded-full transform -translate-x-1/2 z-10 shadow-[0_0_0_4px_rgba(153,246,228,0.2)]"></div>
+                <div className="absolute -left-4 md:left-1/2 w-4 h-4 bg-white dark:bg-dark border-4 border-primary rounded-full transform -translate-x-1/2 z-10 shadow-[0_0_0_4px_rgba(153,246,228,0.2)]"></div>
 
                 <div className="w-full md:w-5/12 hidden md:block"></div>
               </div>

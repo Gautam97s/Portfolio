@@ -4,7 +4,7 @@ export const SITE_META = {
   name: "Gautam Sharma",
   role: "multidisciplinary creative frontend engineer",
   tagline: "I design online experiences which are clean, swift and purposeful.",
-  email: "sharma.gautam0905@gmail.com",
+  email: "gautam.mahi10@gmail.com",
   socials: {
     github: "https://github.com/Gautam97s",
     twitter: "https://x.com/Gautamsharma905",

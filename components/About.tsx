@@ -166,9 +166,9 @@ export const About: React.FC = () => {
                 </div>
 
                 {/* Spotify Card */}
-                <div className="mt-12">
+                {/* <div className="mt-12">
                     <SpotifyCard />
-                </div>
+                </div> */}
             </div>
         </section>
     );
