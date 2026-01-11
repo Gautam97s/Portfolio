@@ -27,7 +27,7 @@ export const PROJECTS: Project[] = [
     title: "TheStore",
     description: "TheStore — a fast, secure Next.js cloud drive where you can save files effortlessly, backed by a simple OTP modal for quick and safe access.",
     tags: ["TypeScript", "Next.ts", "Appwrite", "Tailwind"],
-    image: "/images/Thestore.png",
+    image: "/images/TheStore.png",
     link: "https://the-store-theta.vercel.app/",
     github: "https://github.com/Gautam97s/TheStore"
   },
