@@ -256,17 +256,17 @@ export const Header: React.FC<HeaderProps> = ({ isDark, toggleTheme }) => {
                                 className="text-slate-500 hover:text-primary"
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                GitHub
+                                <Github size={18} />
                             </a>
 
                             <a
                                 href={SITE_META.socials.twitter}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-slate-500 hover:text-primary"
+                                className="text-slate-500 hover:text-primary text-xl"
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                Twitter
+                                𝕏
                             </a>
                         </div>
                     </div>

@@ -47,8 +47,8 @@ export const Contact: React.FC = () => {
             id={SectionId.CONTACT}
             className="py-24 bg-gradient-to-b from-transparent to-primary/5 dark:to-dark/30 relative"
         >
-            <div className="container mx-auto px-8 md:px-12 max-w-4xl">
-                <div className="glass-panel rounded-3xl p-8 md:p-12 shadow-2xl overflow-hidden relative">
+            <div className="container mx-auto px-4 md:px-12 max-w-4xl">
+                <div className="glass-panel rounded-3xl p-6 md:p-12 shadow-2xl overflow-hidden relative">
                     <div className="grid md:grid-cols-2 gap-12">
 
                         {/* Contact Info */}

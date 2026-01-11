@@ -74,7 +74,7 @@ export const Hero: React.FC = () => {
         <section
             id={SectionId.HERO}
             ref={containerRef}
-            className="min-h-screen flex items-center pt-24 md:pt-20 relative"
+            className="min-h-screen flex items-center pt-24 pb-32 md:pt-20 md:pb-0 relative"
         >
             <div className="container mx-auto px-8 md:px-12 relative z-10">
                 <div className="max-w-3xl">
