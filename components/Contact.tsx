@@ -17,11 +17,22 @@ export const Contact: React.FC = () => {
         setStatus("submitting");
 
         try {
-            // Mock API delay
-            await new Promise((resolve) => setTimeout(resolve, 1500));
+            const formData = new FormData(e.target as HTMLFormElement);
+            formData.append("access_key", "4f6c54ce-b6bc-410a-968f-2166332ce5c0");
 
-            setStatus("success");
-            formRef.current?.reset();
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setStatus("success");
+                formRef.current?.reset();
+            } else {
+                setStatus("error");
+            }
 
             // Reset UI after 4 seconds
             setTimeout(() => setStatus("idle"), 4000);
@@ -112,6 +123,7 @@ export const Contact: React.FC = () => {
                                     </label>
                                     <input
                                         id="name"
+                                        name="name"
                                         required
                                         type="text"
                                         placeholder="Your Name"
@@ -128,6 +140,7 @@ export const Contact: React.FC = () => {
                                     </label>
                                     <input
                                         id="email"
+                                        name="email"
                                         required
                                         type="email"
                                         placeholder="name@example.com"
@@ -144,6 +157,7 @@ export const Contact: React.FC = () => {
                                     </label>
                                     <textarea
                                         id="message"
+                                        name="message"
                                         required
                                         rows={4}
                                         placeholder="Tell me about your project..."
