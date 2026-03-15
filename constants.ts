@@ -50,6 +50,15 @@ export const PROJECTS: Project[] = [
     github: "https://github.com/Gautam97s/MovieProject"
   },
   {
+    id: 6,
+    title: "Kairo",
+    description: "Its an AI scheduler for your daily life",
+    tags: ["Shopify", "React", "WebXR"],
+    image: "/images/Kairo.png",
+    link: "https://github.com/Gautam97s/Kairo/tree/main",
+    github: "https://github.com/Gautam97s/Kairo/tree/main",
+  },
+  {
     id: 5,
     title: "Verity",
     description: "Autonomous AI business manager tailored for India's MSME businesses",
@@ -58,17 +67,8 @@ export const PROJECTS: Project[] = [
     link: "https://verity-eta.vercel.app/",
     github: "https://github.com/Gautam97s/Verity",
     isBuilding: true,
-  },
-  {
-    id: 6,
-    title: "Kairo",
-    description: "Its an AI scheduler for your daily life",
-    tags: ["Shopify", "React", "WebXR"],
-    image: "/images/Kairo.png",
-    link: "https://github.com/Gautam97s/Kairo/tree/main",
-    github: "https://github.com/Gautam97s/Kairo/tree/main",
-    isBuilding: true,
-  },
+  }
+  ,
   // {
   //   id: 7,
   //   title: "Pixel Editor",
@@ -102,16 +102,16 @@ export const EXPERIENCE: ExperienceItem[] = [
   {
     id: 1,
     year: "present",
-    role: "Developer",
-    company: "Freelance",
-    description: "Working for a client to build E-commerece Jewelery Website"
+    role: "Frontend Lead",
+    company: "SortMail",
+    description: "Working with DevHub on SortMail as a frontend lead and launching it by end of March"
   },
   {
     id: 2,
-    year: "2025",
-    role: "Frontend Developer",
-    company: "Self Project",
-    description: "Developed TheStore, a fast and secure Next.js cloud drive with OTP modal for quick and safe access."
+    year: "Jan 26 - Feb 26",
+    role: "Full Stack",
+    company: "Freelance",
+    description: "Developed a full-stack jewelry marketplace platform with product catalog, shopping cart, secure checkout, and order management."
   },
   {
     id: 3,
