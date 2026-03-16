@@ -67,8 +67,17 @@ export const PROJECTS: Project[] = [
     link: "https://verity-eta.vercel.app/",
     github: "https://github.com/Gautam97s/Verity",
     isBuilding: true,
+  },
+  {
+    id: 5,
+    title: "OpsPilot",
+    description: "AI-powered DevOps assistant that turns natural language commands into automated infrastructure actions across Kubernetes, Terraform, and cloud platforms.",
+    tags: ["React", "Tailwind", "Next.js", "AI Agents", "FastAPI", "MCP Servers"],
+    image: "/images/OpsPilot.png",
+    link: "https://github.com/Gautam97s/Opspilot",
+    github: "https://github.com/Gautam97s/Opspilot",
+    isBuilding: true,
   }
-  ,
   // {
   //   id: 7,
   //   title: "Pixel Editor",
