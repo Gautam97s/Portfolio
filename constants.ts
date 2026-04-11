@@ -113,7 +113,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     year: "present",
     role: "Frontend Lead",
     company: "SortMail",
-    description: "Working with DevHub on SortMail as a frontend lead and launching it by end of March"
+    description: "Working with DevHub on SortMail as a frontend lead and launching soon"
   },
   {
     id: 2,
